@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>URNA</title>
+</head>
+<body>
+    <header>
+        <h1>URNA</h1>
+        <a href="{% url 'report_votes' %}"><button>RELATÓRIO</button></a>
+    </header>
+
+    <main>
+        <form action="{% url 'register_vote' %}" method="POST">
+            {% csrf_token %}
+            <label>ESCOLHA UMA CHAPA:</label>
+            {{form.name}}
+            <label>CONFIRME O SEU VOTO:</label>
+            {{form.number}}
+            <input id= "submit" type="submit" value="CONFIRMAR">
+        </form>
+
+        
+        <section>
+
+            {% for candidate in Candidates %}
+            <div>
+                <h2>{{candidate.name}}</h2>
+                <h3>{{candidate.number}}</h3>
+            </div>
+            {% endfor %}
+        </section>
+
+    </main>
+
+    <footer>
+        <h1>URNA</h1>
+    </footer>
+</body>
+</html>
